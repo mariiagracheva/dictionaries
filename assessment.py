@@ -28,6 +28,7 @@ def count_words(phrase):
         >>> print_dict(count_words("Porcupine see, porcupine do."))
         {'Porcupine': 1, 'do.': 1, 'porcupine': 1, 'see,': 1}
     """
+    # loop through the list
     phrase_words = phrase.split(" ")
     phrase_dict = {}
 
@@ -65,7 +66,7 @@ def get_melon_price(melon_name):
     """
     # -----------------------------------------------------------------
     # I didn't get how I am suppose to get melons' names and prices,
-    # decided to keep them inside function as lists
+    # decided to keep them inside the function as lists
     # 
     # Create  dictionary with key = melon name and value = melon price
     # -----------------------------------------------------------------
@@ -234,26 +235,37 @@ def kids_game(names):
     good solutions here will definitely require a dictionary.
     """
     # -----------------------------------------------------------------
-    # names - oredered list
+    # 
     # -----------------------------------------------------------------
 
     dict = {}
+
+    # create dictionary keys
+    for name in names:
+        dict.update({name[0] : []})
+    
+    # start result with the first name
+    result = []
     cur_name = names[0]
+    cur_key = names[0][-1]
+    result.append(cur_name)
+    
+    # put all remain names to the dictionary as values, key - first letter
     names = names[1:]
-    while True
-        for name in names:
-        print name, names
-        if cur_name[-1] == name[0]:
-            dict.update({cur_name : name})
-            names = names.remove(name)
-            cur_name = name
-            print "============"
-            print dict, cur_name
-        else:
-            dict.update({cur_name : ""})
+    for name in names:
+        key = name[0]
+        dict[key].append(name)
+    
+    # find next name by key (=last letter from current name)
+    # next name is the first name from list of values for that key
+    # remove used name from list of values
+    while cur_key in dict and len(dict[cur_key]) > 0:
+        cur_name = dict[cur_key][0]
+        result.append(cur_name)
+        dict[cur_key] = dict[cur_key][1:]
+        cur_key = cur_name[-1]
 
-
-    return dict
+    return result
 
 #####################################################################
 # You can ignore everything below this.
